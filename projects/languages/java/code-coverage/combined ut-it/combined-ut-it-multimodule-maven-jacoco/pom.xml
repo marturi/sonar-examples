@@ -31,7 +31,7 @@
     <sonar.analysis.mode>preview</sonar.analysis.mode>
     <sonar.github.pullRequest>2</sonar.github.pullRequest>
     <sonar.github.repository>marturi/sonar-examples</sonar.github.repository>
-    <jacoco.out.path>${session.executionRootDirectory}/target</jacoco.out.path>
+    <jacoco.out.path>/Users/matthew.arturi/dev/Projects/sonar-examples/projects/languages/java/code-coverage/combined ut-it/combined-ut-it-multimodule-maven-jacoco/target</jacoco.out.path>
     <jacoco.out.file>jacoco.exec</jacoco.out.file>
   </properties>
 
