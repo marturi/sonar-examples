@@ -29,7 +29,6 @@
     <sonar.analysis.mode>preview</sonar.analysis.mode>
     <sonar.github.pullRequest>1</sonar.github.pullRequest>
     <sonar.github.repository>marturi/sonar-examples</sonar.github.repository>
-    <sonar.github.oauth>23e65aec867dccee569e2b959b4925b7677b86b2</sonar.github.oauth>
   </properties>
 
   <dependencies>
