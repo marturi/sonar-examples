@@ -29,7 +29,6 @@
     <sonar.analysis.mode>preview</sonar.analysis.mode>
     <sonar.github.pullRequest>1</sonar.github.pullRequest>
     <sonar.github.repository>marturi/sonar-examples</sonar.github.repository>
-    <sonar.projectKey>com.symphony:sbe</sonar.projectKey>
   </properties>
 
   <dependencies>
