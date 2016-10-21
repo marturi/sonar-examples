@@ -11,5 +11,8 @@
   <artifactId>app</artifactId>
 
   <name>Java :: JaCoco Multi Modules :: App</name>
-
+  <properties>
+    <sonar.tests>target/test-classes</sonar.tests>
+    <sonar.java.binaries>target/classes</sonar.java.binaries>
+  </properties>
 </project>
