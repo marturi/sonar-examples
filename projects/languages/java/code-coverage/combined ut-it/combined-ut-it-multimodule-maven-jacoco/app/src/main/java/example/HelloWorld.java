@@ -20,5 +20,12 @@ public class HelloWorld implements Cloneable {
     public void morenotCovered() {
         System.out.println("morenotCovered");
     }
-	
+
+    public void morenotCovered2() {
+        System.out.println("morenotCovered");
+    }
+
+    public void morenotCovered3() {
+        System.out.println("morenotCovered");
+    }
 }
