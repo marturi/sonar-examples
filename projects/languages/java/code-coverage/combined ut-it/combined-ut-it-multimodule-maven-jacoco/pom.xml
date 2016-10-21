@@ -23,8 +23,14 @@
     <!-- The destination file for the code coverage report has to be set to the same value
          in the parent pom and in each module pom. Then JaCoCo will add up information in
          the same report, so that, it will give the cross-module code coverage. -->
-    <sonar.jacoco.itReportPath>${project.basedir}/../target/jacoco-it.exec</sonar.jacoco.itReportPath>
+    <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
     <sonar.language>java</sonar.language>
+    <sonar.host.url>https://sonar.symphony.com</sonar.host.url>
+    <sonar.analysis.mode>preview</sonar.analysis.mode>
+    <sonar.github.pullRequest>1</sonar.github.pullRequest>
+    <sonar.github.repository>marturi/sonar-examples</sonar.github.repository>
   </properties>
 
   <dependencies>
@@ -59,9 +65,13 @@
         <pluginManagement>
           <plugins>
             <plugin>
+              <configuration>
+                <destFile>${sonar.jacoco.reportPath}</destFile>
+                <append>true</append>
+              </configuration>
               <groupId>org.jacoco</groupId>
               <artifactId>jacoco-maven-plugin</artifactId>
-              <version>0.7.2.201409121644</version>
+              <version>0.7.4.201502262128</version>
             </plugin>
           </plugins>
         </pluginManagement>
@@ -69,9 +79,6 @@
           <plugin>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
-            <configuration>
-              <append>true</append>
-            </configuration>
             <executions>
               <execution>
                 <id>agent-for-ut</id>
