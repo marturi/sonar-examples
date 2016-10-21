@@ -21,6 +21,6 @@
   </dependencies>
 
   <properties>
-    <sonar.tests>target/test-classes</sonar.tests>
+    <sonar.tests>${project.basedir}/target/test-classes</sonar.tests>
   </properties>
 </project>
