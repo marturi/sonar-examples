@@ -31,6 +31,8 @@
     <sonar.analysis.mode>preview</sonar.analysis.mode>
     <sonar.github.pullRequest>1</sonar.github.pullRequest>
     <sonar.github.repository>marturi/sonar-examples</sonar.github.repository>
+    <jacoco.out.path>${session.executionRootDirectory}/target</jacoco.out.path>
+    <jacoco.out.file>jacoco.exec</jacoco.out.file>
   </properties>
 
   <dependencies>
@@ -85,12 +87,10 @@
                 <goals>
                   <goal>prepare-agent</goal>
                 </goals>
-              </execution>
-              <execution>
-                <id>agent-for-it</id>
-                <goals>
-                  <goal>prepare-agent-integration</goal>
-                </goals>
+                <configuration>
+                  <destFile>${jacoco.out.path}/${jacoco.out.file}</destFile>
+                  <propertyName>jacoco.agent.arg</propertyName>
+                </configuration>
               </execution>
               <execution>
                 <id>jacoco-site</id>
