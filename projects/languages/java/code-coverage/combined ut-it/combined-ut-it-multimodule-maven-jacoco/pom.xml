@@ -23,7 +23,7 @@
     <!-- The destination file for the code coverage report has to be set to the same value
          in the parent pom and in each module pom. Then JaCoCo will add up information in
          the same report, so that, it will give the cross-module code coverage. -->
-    <sonar.jacoco.reportPath>/Users/matthew.arturi/dev/Projects/sonar-examples/projects/languages/java/code-coverage/combined ut-it/combined-ut-it-multimodule-maven-jacoco/target/jacoco.exec</sonar.jacoco.reportPath>
+    <sonar.jacoco.reportPath>${user.dir}/target/jacoco.exec</sonar.jacoco.reportPath>
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
     <sonar.language>java</sonar.language>
@@ -31,7 +31,7 @@
     <sonar.analysis.mode>preview</sonar.analysis.mode>
     <sonar.github.pullRequest>2</sonar.github.pullRequest>
     <sonar.github.repository>marturi/sonar-examples</sonar.github.repository>
-    <jacoco.out.path>/Users/matthew.arturi/dev/Projects/sonar-examples/projects/languages/java/code-coverage/combined ut-it/combined-ut-it-multimodule-maven-jacoco/target</jacoco.out.path>
+    <jacoco.out.path>${user.dir}/target</jacoco.out.path>
     <jacoco.out.file>jacoco.exec</jacoco.out.file>
   </properties>
 
