@@ -1,6 +1,6 @@
 package example;
 
-public class HelloWorld {
+public class HelloWorld implements Cloneable {
 
     public void coveredByUnitTest() {
         System.out.println("coveredByUnitTest1");
