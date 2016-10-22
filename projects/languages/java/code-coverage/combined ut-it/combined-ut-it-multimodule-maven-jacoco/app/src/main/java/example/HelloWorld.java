@@ -1,6 +1,6 @@
 package example;
 
-public class HelloWorld {
+public class HelloWorld implements Cloneable {
 
     public void coveredByUnitTest() {
         System.out.println("coveredByUnitTest1");
@@ -16,5 +16,16 @@ public class HelloWorld {
     public void notCovered() {
         System.out.println("notCovered");
     }
-	
+
+    public void morenotCovered() {
+        System.out.println("morenotCovered");
+    }
+
+    public void morenotCovered2() {
+        System.out.println("morenotCovered");
+    }
+
+    public void morenotCovered3() {
+        System.out.println("morenotCovered");
+    }
 }

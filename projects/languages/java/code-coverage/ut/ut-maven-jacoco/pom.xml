@@ -11,6 +11,12 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <sonar.language>java</sonar.language>
+    <sonar.host.url>https://sonar.symphony.com</sonar.host.url>
+    <sonar.analysis.mode>preview</sonar.analysis.mode>
+    <sonar.github.pullRequest>3</sonar.github.pullRequest>
+    <sonar.github.repository>marturi/sonar-examples</sonar.github.repository>
   </properties>
 
   <dependencies>
