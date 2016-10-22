@@ -23,7 +23,8 @@
     <!-- The destination file for the code coverage report has to be set to the same value
          in the parent pom and in each module pom. Then JaCoCo will add up information in
          the same report, so that, it will give the cross-module code coverage. -->
-    <sonar.jacoco.reportPath>${project.basedir}/../target</sonar.jacoco.reportPath>
+    <jacocoReportDir>${project.basedir}/../target</jacocoReportDir>
+    <sonar.jacoco.reportPath>${jacocoReportDir}/jacoco.exec</sonar.jacoco.reportPath>
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
     <sonar.language>java</sonar.language>
@@ -97,7 +98,7 @@
               </goals>
               <configuration>
                 <dataFile>${jacoco.destfile}</dataFile>
-                <outputDirectory>${sonar.jacoco.reportPath}</outputDirectory>
+                <outputDirectory>${jacocoReportDir}</outputDirectory>
                 <skip>${skip.surefire.tests}</skip>
               </configuration>
             </execution>
