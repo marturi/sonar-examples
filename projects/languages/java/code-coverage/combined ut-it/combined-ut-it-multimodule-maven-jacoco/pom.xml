@@ -23,7 +23,7 @@
     <!-- The destination file for the code coverage report has to be set to the same value
          in the parent pom and in each module pom. Then JaCoCo will add up information in
          the same report, so that, it will give the cross-module code coverage. -->
-    <sonar.jacoco.reportPath>${user.dir}/target/jacoco.exec</sonar.jacoco.reportPath>
+    <sonar.jacoco.reportPath>${project.basedir}/../target</sonar.jacoco.reportPath>
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
     <sonar.language>java</sonar.language>
@@ -31,8 +31,10 @@
     <sonar.analysis.mode>preview</sonar.analysis.mode>
     <sonar.github.pullRequest>2</sonar.github.pullRequest>
     <sonar.github.repository>marturi/sonar-examples</sonar.github.repository>
-    <jacoco.out.path>${user.dir}/target</jacoco.out.path>
-    <jacoco.out.file>jacoco.exec</jacoco.out.file>
+    <jacoco.destfile>${project.basedir}/../target/jacoco.exec</jacoco.destfile>
+    <maven.surefire.report.plugin>2.19.1</maven.surefire.report.plugin>
+    <jacoco.plugin.version>0.7.6.201602180812</jacoco.plugin.version>
+    <jacoco.excludePattern/>
   </properties>
 
   <dependencies>
@@ -45,60 +47,111 @@
   </dependencies>
 
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.19.1</version>
+          <configuration>
+            <forkCount>4</forkCount>
+            <reuseForks>false</reuseForks>
+            <argLine>-Xmx2048m ${surefireArgLine}</argLine>
+            <includes>
+              <include>**/*Test.java</include>
+            </includes>
+            <skip>${skip.surefire.tests}</skip>
+          </configuration>
+        </plugin>
+
+
+
+        <plugin>
+          <!-- Code Coverage -->
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>${jacoco.plugin.version}</version>
+          <configuration>
+            <haltOnFailure>true</haltOnFailure>
+            <excludes>
+              <exclude>${jacoco.excludePattern}</exclude>
+            </excludes>
+          </configuration>
+          <executions>
+            <execution>
+              <id>pre-unit-test</id>
+              <goals>
+                <goal>prepare-agent</goal>
+              </goals>
+              <configuration>
+                <destFile>${jacoco.destfile}</destFile>
+                <append>true</append>
+                <propertyName>surefireArgLine</propertyName>
+              </configuration>
+            </execution>
+            <execution>
+              <id>post-unit-test</id>
+              <phase>test</phase>
+              <goals>
+                <goal>report</goal>
+              </goals>
+              <configuration>
+                <dataFile>${jacoco.destfile}</dataFile>
+                <outputDirectory>${sonar.jacoco.reportPath}</outputDirectory>
+                <skip>${skip.surefire.tests}</skip>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+
+
+    </pluginManagement>
+
+
+
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
-        </configuration>
+      </plugin>
+
+      <plugin>
+        <!-- for unit test execution -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <!-- For code coverage -->
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
 
-  <profiles>
-    <profile>
-      <id>sonar-coverage</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <build>
-        <pluginManagement>
-          <plugins>
-            <plugin>
-              <configuration>
-                <destFile>${jacoco.out.path}/${jacoco.out.file}</destFile>
-                <append>true</append>
-              </configuration>
-              <groupId>org.jacoco</groupId>
-              <artifactId>jacoco-maven-plugin</artifactId>
-              <version>0.7.4.201502262128</version>
-            </plugin>
-          </plugins>
-        </pluginManagement>
-        <plugins>
-          <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>agent-for-ut</id>
-                <goals>
-                  <goal>prepare-agent</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>jacoco-site</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>report</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>${maven.surefire.report.plugin}</version>
+        <configuration>
+          <showSuccess>false</showSuccess>
+          <alwaysGenerateSurefireReport>true</alwaysGenerateSurefireReport>
+          <aggregate>true</aggregate>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.plugin.version}</version>
+        <configuration>
+          <excludes>
+            <exclude>${jacoco.excludePattern}</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+
 </project>
